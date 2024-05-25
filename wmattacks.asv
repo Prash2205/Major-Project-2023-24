@@ -1,0 +1,61 @@
+% Choose a watermark attack
+attack_choice = input('Choose a watermark attack :\n1. Noise Addition\n2. Cropping\n3. Resizing\n4. Rotation\n5. Compression\n6. Geometric Attacks\n7. Signal Processing Attacks\n8. JPEG Compression\n');
+
+switch attack_choice
+    case 1
+        % Noise Addition
+        noise_type = input('Choose noise type (1: Gaussian, 2: Salt-and-Pepper): ');
+        if noise_type == 1
+            watermarked_image_attacked = imnoise(watermarked_image, 'gaussian', 0, 0.01);
+            imwrite(watermarked_image_attacked, 'gaussian_attack.png', 'png');
+        elseif noise_type == 2
+            watermarked_image_attacked = imnoise(watermarked_image, 'salt & pepper', 0.02);
+            imwrite(watermarked_image_attacked, 'saltpepper_attack.png', 'png');
+
+        else
+            disp('Invalid noise type choice.');
+        end
+        
+    case 2
+        % Cropping
+        % Implement cropping logic here
+        cropped_region = watermarked_image(1:100, 1:100, :); % Crop a 100x100 region
+        imwrite(cropped_region, 'crop_attack.png', 'png');
+        
+    case 3
+        % Resizing
+        % Implement resizing logic here
+        resized_image = imresize(watermarked_image, [200, 200]); % Resize to 200x200
+        imwrite(resized_image, 'resizing.png', 'png');
+        
+    case 4
+        % Rotation
+        % Implement rotation logic here
+        rotated_image = imrotate(watermarked_image, 30); % Rotate by 30 degree
+        imwrite(rotated_image, 'rotation.png', 'png');
+
+    case 5
+        % Compression
+        % Implement compression logic here
+        imwrite(watermarked_image, 'compression.jpg', 'jpg', 'Quality', 50); % Save with JPEG compression quality of 50
+
+    case 6
+        % Geometric Attacks
+        % Implement geometric attacks logic here
+        translated_image = imtranslate(watermarked_image, [20, 10]); % Translate by 20 pixels horizontally and 10 pixels vertically
+        imwrite(translated_image, 'geometric_attack.png', 'png');
+
+    case 7
+        % Signal Processing Attacks
+        % Implement signal processing attacks logic here
+        filtered_image = imgaussfilt(watermarked_image, 2); % Apply Gaussian filtering with a standard deviation of 2
+        imwrite(filtered_image, 'filter_attack.png','png');
+        
+    case 8
+        % JPEG Compression
+        % Implement JPEG compression logic here
+        imwrite(watermarked_image, 'watermarked_compressed_jpeg.jpg', 'jpg', 'Quality', 50); % Save with JPEG compression quality of 50
+
+    otherwise
+        disp('Invalid choice. Please choose a number between 1 and 8.');
+end
